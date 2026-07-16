@@ -28,6 +28,7 @@ __pycache__/
 # Data
 data/raw/
 data/processed/
+data/perturbed
 data/interim/
 data/external/
 
