@@ -3,6 +3,8 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 
+from src import evaluate
+
 
 def build_vectorizer(ngram_range=(1, 1), min_df=2):
     """Build a TF-IDF vectorizer with the given n-gram range."""
@@ -16,3 +18,10 @@ def train_logistic_regression(X, y, C=1.0, seed=42):
     )
     model.fit(X, y)
     return model
+
+
+def evaluate_baseline_on_df(vectorizer, clf, df, text_col="text"):
+    """Predict with the baseline model and return macro-F1 against df['label']."""
+    X = vectorizer.transform(df[text_col])
+    preds = clf.predict(X)
+    return evaluate.macro_f1(df["label"], preds)

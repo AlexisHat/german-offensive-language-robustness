@@ -31,3 +31,8 @@ FINE_TUNE_LR = 2e-5
 FINE_TUNE_BATCH_SIZE = 16
 FINE_TUNE_EPOCHS = 4
 FINE_TUNE_WEIGHT_DECAY = 0.01
+
+# Empirically derived in notebook 05 from the tokenized length distribution
+# of train.csv; reused as-is for evaluation so tokenization stays consistent
+# with what the models were fine-tuned on.
+TRANSFORMER_MAX_LENGTH = 128

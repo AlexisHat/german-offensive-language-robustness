@@ -102,6 +102,14 @@ def predict(model, loader, device):
     return torch.cat(all_labels).numpy(), torch.cat(all_preds).numpy()
 
 
+def evaluate_transformer_on_df(model, tokenizer, df, text_col, max_length, batch_size, device):
+    """Predict with a fine-tuned transformer and return macro-F1 against df['label']."""
+    dataset = GermEvalDataset(df[text_col], df["label"], tokenizer, max_length)
+    loader = DataLoader(dataset, batch_size=batch_size, shuffle=False)
+    y_true, y_pred = predict(model, loader, device)
+    return evaluate.macro_f1(y_true, y_pred)
+
+
 def run_finetuning(
     checkpoint, train_df, val_df, seed, max_length, batch_size, lr,
     weight_decay, num_epochs, output_dir, device,

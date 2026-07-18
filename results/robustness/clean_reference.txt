@@ -1,0 +1,3 @@
+baseline clean macro-F1: 0.6445
+gbert-base clean macro-F1: 0.7731 ± 0.0039
+gbert-base per-seed clean macro-F1: {42: 0.7760942019633001, 123: 0.7744694118689288, 67: 0.7686403100775194}
